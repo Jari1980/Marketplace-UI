@@ -90,7 +90,7 @@ function initialData(){
         button.type = "button";
         button.textContent = "Details";
         button.id = i.id;
-        button.onclick = detaljer;
+        button.addEventListener("click", function () { detaljer(i.id); });
         
 
         cardFooter.appendChild(button);
@@ -159,12 +159,15 @@ function filter(){
         const cardFooter = document.createElement("div");
         cardFooter.classList.add("card-footer")
 
+        
+
         const button = document.createElement("button"); //Added
         button.classList.add("btn", "btn-primary");
         button.id = filteredAdvertisement[i].id;
         button.type = "button";
         button.textContent = "Details";
-        button.onclick = detaljer;
+        button.addEventListener("click", function () { detaljer(filteredAdvertisement[i].id); });
+        //button.onclick = detaljer(filteredAdvertisement[i].id);
         //console.log(filteredAdvertisement[i].id + "-----");
         
 
@@ -205,7 +208,7 @@ function filter(){
 
 //document.getElementById("1").addEventListener("click", test);
 
-function detaljer(){
-    console.log("-------------")
-    alert("Hej")
+function detaljer(id){
+    alert("Hej, contact info: " + advertisementsData[id - 1].contact);
 }
+
