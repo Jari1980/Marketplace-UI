@@ -54,6 +54,12 @@ function initialData(){
 
         const col = document.createElement("div");
         col.classList.add("col")
+        col.addEventListener("mouseover", function() {toggle(i.id)}); //
+        //col.onmouseover = function() {toggle(i.id)} //= toggle(i.id);
+        //col.onmouseover = console.log("....");
+        //col.onmouseover = "mouseover", () => {console.log("heluu")};
+        //col.onmouseover = function() {toggle(i.id)};
+        
 
         const card = document.createElement("div");
         card.classList.add("card", "h-100");
@@ -74,8 +80,8 @@ function initialData(){
         cardText.textContent = i.description; //+ "\n" + i.contact;
 
         const cardContact = document.createElement("p");
-        cardContact.classList.add("card-text-mod");
-        cardContact.textContent = i.contact;
+        cardContact.classList.add("card-text-mod" + i.id);
+        cardContact.textContent = "***" //i.contact;
         
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardText);
@@ -128,7 +134,8 @@ function filter(){
         console.log(i + "msg")
 
         const col = document.createElement("div");
-        col.classList.add("col")
+        col.classList.add("col");
+        col.addEventListener("mouseover", function() {toggle(filteredAdvertisement[i].id)});
 
         const card = document.createElement("div");
         card.classList.add("card", "h-100");
@@ -149,7 +156,8 @@ function filter(){
         cardText.textContent = filteredAdvertisement[i].description;// + "\n" + filteredAdvertisement[i].contact;
 
         const cardContact = document.createElement("p");
-        cardContact.classList.add("card-text-mod");
+        cardContact.classList.add("card-text-mod" + filteredAdvertisement[i].id);
+        //cardContact.classList.add("card-text-mod" + i.id);
         cardContact.textContent = filteredAdvertisement[i].contact;
         
         cardBody.appendChild(cardTitle);
@@ -191,24 +199,29 @@ function filter(){
 
  // Toggle contact
 
- function toggleContact(){
-    let mod = document.getElementsByClassName("card-text-mod");
-    for(let i = 0; i < mod.length; i++){
-        if(mod[i].style.display === "none"){
-            mod[i].style.display= "block";
-        }
-        else{
-            mod[i].style.display = "none";
-        }
+function toggle(id){
+    console.log("nuu: " + id);
+    let mod = document.getElementsByClassName("card-text-mod" + id)[0];
+    console.log(mod);
+    if(mod.innerHTML == "***"){
+        mod.innerHTML = advertisementsData[id - 1].contact;
     }
- }
+    else{
+        mod.innerHTML = "***";
+    }
+}
+
+
+
+ 
 
  
 // Details
 
-//document.getElementById("1").addEventListener("click", test);
+
 
 function detaljer(id){
     alert("Hej, contact info: " + advertisementsData[id - 1].contact);
 }
+
 
